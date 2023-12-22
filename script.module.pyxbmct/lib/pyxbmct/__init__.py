@@ -10,11 +10,7 @@ Licence: GPL v.3 http://www.gnu.org/licenses/gpl.html
 
 from __future__ import absolute_import
 from .addonwindow import *
-from .abstractgrid import AbstractGrid
-from .addoncontrols import *
-from .addonwindowerror import AddonWindowError
-from .addonskin import *
-from .kodiconstants import *
+from .addonskin import BaseSkin
 
 __all__ = [
     'ALIGN_LEFT',
@@ -35,7 +31,6 @@ __all__ = [
     'ACTION_MOUSE_DRAG',
     'ACTION_MOUSE_MOVE',
     'ACTION_MOUSE_LEFT_CLICK',
-    'AbstractGrid',
     'AddonWindowError',
     'Label',
     'FadeLabel',
@@ -46,15 +41,11 @@ __all__ = [
     'Edit',
     'List',
     'Slider',
-    'Group',
     'BlankFullWindow',
     'BlankDialogWindow',
     'AddonDialogWindow',
     'AddonFullWindow',
     'Skin',
     'skin',
-    'BaseSkin',
-    'ControlWithConnectCallback',
-    'ControlWithPlacedCallback',
-    'ControlWithRemovedCallback'
+    'BaseSkin'
 ]

@@ -5,33 +5,22 @@
 # Licence: GPL v.3 <http://www.gnu.org/licenses/gpl.html>
 """Classes for defining the appearance of PyXBMCt Windows and Controls"""
 
-from __future__ import unicode_literals
-
 import os
-from abc import ABCMeta, abstractmethod
-import xbmc
+from abc import ABC, abstractmethod
+
+import xbmcvfs
 from xbmcaddon import Addon
-from .xbmc4xbox import isXBMC4XBOX
 
-_XBMC4XBOX = isXBMC4XBOX()
-
-if not _XBMC4XBOX:
-    from six import with_metaclass
-
-# Note: this file exports an instance of Skin called skin
+ADDON_DIR = xbmcvfs.translatePath(Addon('script.module.pyxbmct').getAddonInfo('path'))
 
 
-class BaseSkin(object if _XBMC4XBOX else with_metaclass(ABCMeta, object)):
+class BaseSkin(ABC):
     """
     Abstract class for creating fully customized skins
 
     .. warning:: This class is meant for subclassing and cannot be instantiated directly!
         A sublcass must implement all the following properties.
     """
-
-    if _XBMC4XBOX:
-        __metaclass__ = ABCMeta
-
     @abstractmethod
     def images(self):
         """
@@ -212,15 +201,9 @@ class Skin(BaseSkin):
     Defines parameters that control
     the appearance of PyXBMCt windows and controls.
     """
-
     def __init__(self):
-        kodi_version = xbmc.getInfoLabel('System.BuildVersion')[:2]
-        # Kodistubs return an empty string
-        if not _XBMC4XBOX and kodi_version and kodi_version >= '17':
-            self._estuary = True
-        else:
-            self._estuary = False
-        self._texture_dir = os.path.join(Addon('script.module.pyxbmct').getAddonInfo('path'),
+        self._estuary = True
+        self._texture_dir = os.path.join(ADDON_DIR,
                                          'lib', 'pyxbmct', 'textures')
 
     @property
@@ -351,6 +334,3 @@ class Skin(BaseSkin):
     @property
     def main_bg_img(self):
         return os.path.join(self.images, 'AddonWindow', 'SKINDEFAULT.jpg')
-
-
-skin = Skin()

@@ -4,6 +4,7 @@
 
 import os
 from xml.dom.minidom import parse
+
 from setuptools import setup, find_packages
 
 this_dir = os.path.dirname(os.path.abspath(__file__))
@@ -22,14 +23,9 @@ setup(
     packages=find_packages('./script.module.pyxbmct/lib'),
     install_requires=[
         'Kodistubs',
-        'six',
-        'kodi_six @ git+https://github.com/romanvm/kodi.six'
     ],
     extras_require={
         'dev': [
-            'unittest2',
-            'mock',
-            'pytype',
             'Sphinx'
         ]
     },
